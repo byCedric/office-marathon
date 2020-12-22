@@ -39,6 +39,12 @@ With this app, you can measure your total distance traveled within the office or
 - **[services/location/storage](./src/services/location/storage.ts)** - simple helpers to store location data in local storage, using [Async Storage](https://github.com/react-native-async-storage/async-storage).
 - **[services/location/track](./src/services/location/track.ts)** - simple helpers to manage background location tracking, and the background task itself.
 
+## Run locally
+
+- Clone the repository
+- `$ yarn install`
+- `$ expo start`
+
 <div align="center">
   <br />
   with :heart:&nbsp;&nbsp;<strong>byCedric</strong>
