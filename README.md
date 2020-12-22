@@ -1,4 +1,7 @@
 <div align="center">
+  <br/>
+  <img src="https://raw.githubusercontent.com/byCedric/office-marathon/main/assets/icon.png" alt="vscode-expo" width="200">
+  <br />
   <h1>Office Marathon</h1>
   <p></p>
   <p>An example app for <a href="https://docs.expo.io/versions/latest/sdk/location/#background-location-methods">background location</a> tracking in Expo</p>
