@@ -18,7 +18,7 @@
   <br />
 </div>
 
-With this app you can measure your total distance traveled within the office, or your home. It's a simple app with the following structure.
+With this app, you can measure your total distance traveled within the office or your home. It's a simple app with the following structure.
 
 - **[app.tsx](./src/app.tsx)** - is our entrypoint for the app, combining all providers.
 
