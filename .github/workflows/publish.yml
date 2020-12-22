@@ -1,8 +1,9 @@
 ---
+name: publish
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   publish:
     name: Install and publish
