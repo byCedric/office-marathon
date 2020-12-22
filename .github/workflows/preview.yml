@@ -1,0 +1,33 @@
+---
+on: [pull_request]
+jobs:
+  preview:
+    name: Publish preview
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == 'bycedric/office-marathon'
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Set up Expo
+        uses: expo/expo-github-action@v5
+        with:
+          expo-cache: true
+          expo-version: 4.x
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Publish to Expo
+        run: expo publish --release-channel=pr-${{ github.event.number }}
+      - name: Get deployment link
+        run: echo "::set-output name=path::@bycedric/office-marathon?release-channel=pr-${{ github.event.number }}"
+        id: expo
+      - name: Comment deployment link
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: Awesome! You can [preview the PR here](https://expo.io/${{ steps.expo.outputs.path }}).<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>
