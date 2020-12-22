@@ -1,12 +1,13 @@
+import { ActivityIndicator, createThemedComponent, DripsyProvider, Theme, useDripsyTheme } from 'dripsy';
+import Constants from 'expo-constants';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { createThemedComponent, DripsyProvider, Theme, useDripsyTheme } from 'dripsy';
-import Constants from 'expo-constants';
 
 const theme: Theme = {
   colors: {
     background: '#f8f8f8',
-    text: 'rgba(0,0,0,0.5)',
+    text: 'rgba(0,0,0,0.7)',
+    accent: '#333',
   },
   fonts: {
     root: 'open-sans',
@@ -111,3 +112,11 @@ export const Button: React.FC<ButtonProps> = (props) => (
     </Box>
   </ButtonPressable>
 );
+
+export const Spinner: React.FC = (props) => {
+  const { theme } = useDripsyTheme();
+
+  return (
+    <ActivityIndicator color={theme.colors?.accent} />
+  );
+};

@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LocationObject } from 'expo-location';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import * as Storage from '../services/location/storage';
-import * as Task from '../services/location/task';
+import * as Storage from './storage';
+import * as Track from './track';
 
 const geodist = require('geodist');
 
@@ -21,11 +21,12 @@ function getDistanceFromLocations(locations: LocationObject[]) {
       if (index === 0) {
         return distance;
       }
-      return distance + geodist(
+      const total = distance + geodist(
         all[index - 1], // previous location
         location, // current location
-        { exact: true, unit: 'm' }, // we want it semi-exact, in meters
+        { exact: true, unit: 'meters' }, // we want it semi-exact, in meters
       );
+      return total;
     }, 0);
 }
 
@@ -33,17 +34,16 @@ function getDistanceFromLocations(locations: LocationObject[]) {
  * An easy-to-use hook that combines all required functionality.
  * It keeps the data in sync as much as possible.
  */
-export function useLocationTracking(autoStart = false) {
-  const [locations, setLocations] = useState<LocationObject[]>();
+export function useLocationTracking() {
   const [isTracking, setIsTracking] = useState<boolean>();
 
   const onStartTracking = useCallback(async () => {
-    await Task.startTracking();
+    await Track.startTracking();
     setIsTracking(true);
   }, []);
 
   const onStopTracking = useCallback(async () => {
-    await Task.stopTracking();
+    await Track.stopTracking();
     setIsTracking(false);
   }, []);
 
@@ -52,21 +52,13 @@ export function useLocationTracking(autoStart = false) {
       await onStopTracking();
     }
     await Storage.clearLocations();
-    setLocations([]);
   }, [isTracking]);
 
   useEffect(() => {
-    Storage.getLocations().then(setLocations);
-    Task.isTracking().then(isTracking => {
-      setIsTracking(isTracking);
-      if (autoStart && !isTracking) {
-        onStartTracking();
-      }
-    });
-  }, [autoStart]);
+    Track.isTracking().then(setIsTracking);
+  }, []);
 
   return {
-    locations,
     isTracking,
     startTracking: onStartTracking,
     stopTracking: onStopTracking,
@@ -75,12 +67,39 @@ export function useLocationTracking(autoStart = false) {
 }
 
 /**
+ * A hook to poll for changes in the storage, updates the UI if locations were added.
+ */
+export function useLocationData(interval = 1000) {
+  const [locations, setLocations] = useState<LocationObject[]>([]);
+
+  const onPollStorage = useCallback(async () => {
+    const stored = await Storage.getLocations();
+    if (stored.length !== locations.length) {
+      setLocations(stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    // load the locations on first render
+    Storage.getLocations().then(setLocations);
+    // create a timer to poll for changes
+    const timerId = window.setInterval(onPollStorage, interval);
+    // when the hook is unmounted, remove the timer
+    return () => window.clearInterval(timerId);
+  }, [interval]);
+
+  return locations;
+}
+
+/**
  * A hook to calculate the distance, in meters, between the registered locations.
  */
-export function useLocationDistance(locations: LocationObject[] = []) {
+export function useLocationDistance(locations: LocationObject[], precision = 2) {
   // Let's memoize this method to avoid costly calculations
-  return useMemo(
-    () => getDistanceFromLocations(locations || []),
-    [locations],
-  );
+  return useMemo(() => {
+    const distance = getDistanceFromLocations(locations);
+    const factor = Math.pow(10, precision);
+    const rounded = Math.round(distance * factor) / factor;
+    return rounded;
+  }, [locations, precision]);
 }

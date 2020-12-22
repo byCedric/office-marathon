@@ -31,9 +31,14 @@ export async function addLocation(location: LocationObject): Promise<LocationObj
   const existing = await getLocations();
   const locations = [...existing, location];
   await setLocations(locations);
+  console.log('[storage]', 'added location -', locations.length, 'stored locations');
   return locations;
 }
 
+/**
+ * Reset all stored locations.
+ */
 export async function clearLocations(): Promise<void> {
   await AsyncStorage.removeItem(locationStorageName);
+  console.log('[storage]', 'cleared locations');
 }

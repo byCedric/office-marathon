@@ -1,10 +1,6 @@
-import React from 'react';
+import { useFonts, OpenSans_600SemiBold, OpenSans_400Regular } from '@expo-google-fonts/open-sans';
 import AppLoading from 'expo-app-loading';
-import {
-  useFonts,
-  OpenSans_600SemiBold,
-  OpenSans_400Regular,
-} from '@expo-google-fonts/open-sans';
+import React from 'react';
 
 export const AssetProvider: React.FC = (props) => {
   const [isLoaded] = useFonts({

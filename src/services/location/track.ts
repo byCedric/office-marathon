@@ -22,8 +22,19 @@ export async function isTracking(): Promise<boolean> {
  */
 export async function startTracking() {
   await Location.startLocationUpdatesAsync(locationTaskName, {
+    accuracy: Location.Accuracy.BestForNavigation,
     timeInterval: 60 * 1000,
+    // android behavior
+    foregroundService: {
+      notificationTitle: 'Office marathon is active',
+      notificationBody: 'Monitoring your location to measure total distance',
+      notificationColor: '#333333',
+    },
+    // ios behavior
+    activityType: Location.ActivityType.Fitness,
+    showsBackgroundLocationIndicator: true,
   });
+  console.log('[tracking]', 'started background location task');
 }
 
 /**
@@ -32,6 +43,7 @@ export async function startTracking() {
  */
 export async function stopTracking() {
   await Location.stopLocationUpdatesAsync(locationTaskName);
+  console.log('[tracking]', 'stopped background location task');
 }
 
 /**
@@ -40,16 +52,18 @@ export async function stopTracking() {
  */
 TaskManager.defineTask(locationTaskName, async (event) => {
   if (event.error) {
-    return console.log('Something went wrong within the background location task...', event.error);
+    return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
   }
 
   const locations = (event.data as any).locations as Location.LocationObject[];
-  console.log('Received new locations', locations);
+  console.log('[tracking]', 'Received new locations', locations);
 
   try {
-    await Promise.all(locations.map(location => addLocation(location)));
-    console.log('Added new location, currently stored', (await getLocations()).length, 'locations');
+    // have to add it sequentially, parses/serializes existing JSON
+    for (const location of locations) {
+      await addLocation(location);
+    }
   } catch (error) {
-    console.log('Something went wrong when saving a new location...', error);
+    console.log('[tracking]', 'Something went wrong when saving a new location...', error);
   }
 });

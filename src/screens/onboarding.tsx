@@ -1,19 +1,36 @@
-import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { LOCATION, usePermissions } from 'expo-permissions';
+import React, { useCallback, useEffect } from 'react';
 
-import { Box, Button, Title, Paragraph } from '../providers/theme';
-import { ActivityIndicator,  } from 'dripsy';
+import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 export const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();
   const [permission, askPermission] = usePermissions(LOCATION);
 
+  const onContinue = useCallback(() => {
+    navigation.navigate('Distance');
+  }, [navigation]);
+
   useEffect(() => {
+    // Only redirect on first render or permission change,
+    // not when users go back to this screen.
     if (permission?.granted) {
-      navigation.navigate('Distance');
+      onContinue();
     }
   }, [permission?.granted]);
+
+  if (permission?.granted) {
+    return (
+      <Box variant='page'>
+        <Box>
+          <Title>Permissions granted</Title>
+          <Paragraph>To monitor your office marathon, we need access to background location.</Paragraph>
+        </Box>
+        <Button onPress={onContinue}>Let's start!</Button>
+      </Box>
+    );
+  }
 
   return (
     <Box variant='page'>
@@ -22,7 +39,7 @@ export const OnboardingScreen: React.FC = () => {
         <Paragraph>To monitor your office marathon, we need access to background location.</Paragraph>
       </Box>
       {!permission
-        ? <ActivityIndicator color="#333" />
+        ? <Spinner />
         : <Button onPress={askPermission}>Grant permission</Button>
       }
     </Box>

@@ -1,6 +1,6 @@
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 
 import { DistanceScreen } from '../screens/distance';
 import { OnboardingScreen } from '../screens/onboarding';
