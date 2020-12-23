@@ -69,7 +69,7 @@ export function useLocationTracking() {
 /**
  * A hook to poll for changes in the storage, updates the UI if locations were added.
  */
-export function useLocationData(interval = 1000) {
+export function useLocationData(interval = 5000) {
   const [locations, setLocations] = useState<LocationObject[]>([]);
 
   const onPollStorage = useCallback(async () => {
@@ -77,7 +77,7 @@ export function useLocationData(interval = 1000) {
     if (stored.length !== locations.length) {
       setLocations(stored);
     }
-  }, []);
+  }, [locations]);
 
   useEffect(() => {
     // load the locations on first render
@@ -86,7 +86,7 @@ export function useLocationData(interval = 1000) {
     const timerId = window.setInterval(onPollStorage, interval);
     // when the hook is unmounted, remove the timer
     return () => window.clearInterval(timerId);
-  }, [interval]);
+  }, [interval, onPollStorage]);
 
   return locations;
 }
