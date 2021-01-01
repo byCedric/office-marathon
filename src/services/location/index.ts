@@ -1,5 +1,5 @@
 import { LocationObject } from 'expo-location';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import * as Storage from './storage';
 import * as Track from './track';
@@ -69,26 +69,31 @@ export function useLocationTracking() {
 /**
  * A hook to poll for changes in the storage, updates the UI if locations were added.
  */
-export function useLocationData(interval = 5000) {
-  const [locations, setLocations] = useState<LocationObject[]>([]);
+export function useLocationData(interval = 3000) {
+  const locations = useRef<LocationObject[]>([]);
+  const [count, setCount] = useState(0); // count state is only used as rerender trigger, from timer callback
 
-  const onPollStorage = useCallback(async () => {
-    const stored = await Storage.getLocations();
-    if (stored.length !== locations.length) {
-      setLocations(stored);
+  const onLocations = useCallback((stored: LocationObject[]) => {
+    // check if data was changed using ref data.
+    // this method is called from outside react, so we can't use state data without reinitializing it
+    if (stored.length !== locations.current.length) {
+      // update the locations, but this won't trigger a rerender or update
+      locations.current = stored;
+      // update the state value, triggering a rerender
+      setCount(locations.current.length);
     }
-  }, [locations]);
+  }, [setCount, locations]);
 
   useEffect(() => {
     // load the locations on first render
-    Storage.getLocations().then(setLocations);
+    Storage.getLocations().then(onLocations);
     // create a timer to poll for changes
-    const timerId = window.setInterval(onPollStorage, interval);
+    const timerId = window.setInterval(() => Storage.getLocations().then(onLocations), interval);
     // when the hook is unmounted, remove the timer
     return () => window.clearInterval(timerId);
-  }, [interval, onPollStorage]);
+  }, [interval]);
 
-  return locations;
+  return locations.current;
 }
 
 /**
