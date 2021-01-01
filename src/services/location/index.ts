@@ -69,7 +69,7 @@ export function useLocationTracking() {
 /**
  * A hook to poll for changes in the storage, updates the UI if locations were added.
  */
-export function useLocationData(interval = 5000) {
+export function useLocationData(interval = 3000) {
   const locations = useRef<LocationObject[]>([]);
   const [count, setCount] = useState(0); // count state is only used as rerender trigger, from timer callback
 
