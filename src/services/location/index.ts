@@ -1,5 +1,5 @@
 import { LocationObject } from 'expo-location';
-import { createContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import * as Storage from './storage';
 import * as Track from './track';
