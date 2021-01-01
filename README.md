@@ -9,6 +9,9 @@
     <a href="https://github.com/bycedric/office-marathon/blob/master/LICENSE.md">
       <img src="https://img.shields.io/github/license/byCedric/office-marathon?style=flat-square" alt="license" />
     </a>
+    <a href="https://play.google.com/store/apps/details?id=com.bycedric.officemarathon">
+      <img src="https://img.shields.io/badge/android-play%20store-green?style=flat-square" alt="Android Play store" />
+    </a>
     <a href="https://expo.io/@bycedric/projects/office-marathon">
       <img src="https://img.shields.io/badge/demo-expo.io-lightgrey.svg?style=flat-square" alt="demo" />
     </a>
