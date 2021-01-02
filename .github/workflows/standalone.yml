@@ -21,9 +21,6 @@ jobs:
         run: yarn install
       - name: Start EAS build
         run: >
-          npx eas-cli build
-            --wait
-            --platform=android
-            --profile=${{ github.event.inputs.profile }}
+          npx eas-cli build --wait --platform=android --profile=${{ github.event.inputs.profile }}
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
