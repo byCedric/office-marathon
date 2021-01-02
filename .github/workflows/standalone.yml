@@ -25,3 +25,5 @@ jobs:
             --wait
             --platform=android
             --profile=${{ github.event.inputs.profile }}
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
