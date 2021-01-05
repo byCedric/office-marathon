@@ -34,7 +34,7 @@ With this app, you can measure your total distance traveled within the office or
 ### Screens
 
 - **[screens/onboarding](./src/screens/onboarding.tsx)** - this is where the app asks the user for background location permissions.
-- **[screens/distance](./src/screens/onboarding.tsx)** - after the permissions are granted, the user can start/stop/reset location tracking and see their distance.
+- **[screens/distance](./src/screens/distance.tsx)** - after the permissions are granted, the user can start/stop/reset location tracking and see their distance.
 
 ### Services
 
