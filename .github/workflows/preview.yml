@@ -18,7 +18,7 @@ jobs:
         with:
           expo-cache: true
           expo-version: 4.x
-          expo-token: biepboep
+          expo-token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Publish to Expo
