@@ -17,8 +17,8 @@ jobs:
         uses: expo/expo-github-action@master
         with:
           expo-cache: true
-          expo-version: 2.x
-          expo-token: ${{ secrets.EXPO_TOKEN }}
+          expo-version: 4.x
+          expo-token: biepboep
       - name: Install dependencies
         run: yarn install
       - name: Publish to Expo
