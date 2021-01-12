@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 14.x
       - name: Set up Expo
-        uses: expo/expo-github-action@master
+        uses: expo/expo-github-action@v5
         with:
           expo-cache: true
           expo-version: 4.x
