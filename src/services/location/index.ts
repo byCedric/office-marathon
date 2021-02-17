@@ -113,8 +113,9 @@ export function useLocationDistance(locations: LocationObject[], precision = 2) 
  * EM ADD BACKGROUND index: Check to see if background location services are available
  */
 export function checkBackgroundTracking() {
-  const [isBackground, setIsBackground] = useState<boolean>();
-//   useCallback(async () => {
+  // const [isBackground, setIsBackground] = useState<boolean>();
+
+  //   useCallback(async () => {
 //   if (await Track.isBackgroundTrackingAvailable()) {
 //     setIsBackground(true);
 //   } else {
@@ -123,10 +124,7 @@ export function checkBackgroundTracking() {
 // }, [])
   // return(isBackground);
 
-  useEffect(() => {
-    Track.isBackgroundTrackingAvailable().then(setIsBackground);
-  }, []);
-  return(isBackground);
+  return Track.isBackgroundTrackingAvailable();
 
 
   // setIsBackground(Track.BackgroundTrackingAvailable());

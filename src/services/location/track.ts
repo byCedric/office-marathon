@@ -1,7 +1,9 @@
 import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
+import { useState } from 'react';
 
 import { addLocation, getLocations } from './storage';
+
 
 /**
  * The unique name of the background location task.
@@ -52,7 +54,9 @@ export async function stopTracking() {
 export async function isBackgroundTrackingAvailable() {
   // return await Location.isBackgroundLocationAvailableAsync();
   // console.log('Checking background location tracking availability');
-  return await Location.isBackgroundLocationAvailableAsync();
+  const [isBackground, setIsBackground] = useState<boolean>();
+  Location.isBackgroundLocationAvailableAsync().then(setIsBackground);
+  return isBackground;
 }
 
 /**
