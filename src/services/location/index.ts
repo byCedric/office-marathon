@@ -108,3 +108,38 @@ export function useLocationDistance(locations: LocationObject[], precision = 2) 
     return rounded;
   }, [locations, precision]);
 }
+
+/**
+ * EM ADD BACKGROUND index: Check to see if background location services are available
+ */
+export function checkBackgroundTracking() {
+  const [isBackground, setIsBackground] = useState<boolean>();
+//   useCallback(async () => {
+//   if (await Track.isBackgroundTrackingAvailable()) {
+//     setIsBackground(true);
+//   } else {
+//     setIsBackground(false);
+//   }
+// }, [])
+  // return(isBackground);
+
+  useEffect(() => {
+    Track.isBackgroundTrackingAvailable().then(setIsBackground);
+  }, []);
+  return(isBackground);
+
+
+  // setIsBackground(Track.BackgroundTrackingAvailable());
+
+  // const bckgdcheck = useCallback(async () => {
+  //   await Track.BackgroundTrackingAvailable();
+  // }, [isBackground])
+  // setIsBackground(bckgdcheck);
+  // return isBackground;
+
+
+  // if (await Track.isBackgroundTrackingAvailable()) {
+  //  console.log('Background services are enabled and available')
+  // } else {
+  //   console.log('Background services NOT AVAILABLE');
+ }

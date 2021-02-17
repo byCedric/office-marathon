@@ -47,6 +47,15 @@ export async function stopTracking() {
 }
 
 /**
+ * EM ADD BACKGROUND track: Check to see if background location services are available
+ */
+export async function isBackgroundTrackingAvailable() {
+  // return await Location.isBackgroundLocationAvailableAsync();
+  // console.log('Checking background location tracking availability');
+  return await Location.isBackgroundLocationAvailableAsync();
+}
+
+/**
  * Define the background task that's adding locations to the storage.
  * This method isn't "directly" connected to React, that's why we store the data locally.
  */
@@ -67,3 +76,4 @@ TaskManager.defineTask(locationTaskName, async (event) => {
     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
   }
 });
+

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
 
 import { Box, Button, Paragraph, Title } from '../providers/theme';
-import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
+import { checkBackgroundTracking, useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
 
 export const DistanceScreen: React.FC = () => {
   const locations = useLocationData();
@@ -18,6 +18,13 @@ export const DistanceScreen: React.FC = () => {
           ? <Paragraph>You didn't walk yet, start the location tracking and start walking.</Paragraph>
           : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
         }
+      </Box>
+      <Box>
+        {checkBackgroundTracking() 
+          ? <Paragraph>Background location services are enabled. You're good to go!</Paragraph>
+          : <Paragraph>You must enable background location services for the app to function!</Paragraph>
+        }
+        <Button onPress={checkBackgroundTracking}>Check for Background Services</Button>
       </Box>
       <Box variant='row'>
         {tracking.isTracking
