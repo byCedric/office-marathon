@@ -38,8 +38,17 @@ export function useLocationTracking() {
   const [isTracking, setIsTracking] = useState<boolean>();
 
   const onStartTracking = useCallback(async () => {
-    await Track.startTracking();
-    setIsTracking(true);
+    try {
+      await Track.startTracking();
+      setIsTracking(true);
+    } catch(error) {
+      //const bckgdcheck = JSON.stringify(error).includes("Not authorized to use background location services");
+      if (JSON.stringify(error).includes("Not authorized to use background location services")) {
+        console.log("Background services are not authorized");
+      } else {
+        console.log(error);
+      }
+    }
   }, []);
 
   const onStopTracking = useCallback(async () => {
@@ -112,32 +121,32 @@ export function useLocationDistance(locations: LocationObject[], precision = 2) 
 /**
  * EM ADD BACKGROUND index: Check to see if background location services are available
  */
-export function checkBackgroundTracking() {
-  // const [isBackground, setIsBackground] = useState<boolean>();
+// export function checkBackgroundTracking() {
+//   // const [isBackground, setIsBackground] = useState<boolean>();
 
-  //   useCallback(async () => {
-//   if (await Track.isBackgroundTrackingAvailable()) {
-//     setIsBackground(true);
-//   } else {
-//     setIsBackground(false);
-//   }
-// }, [])
-  // return(isBackground);
+//   //   useCallback(async () => {
+// //   if (await Track.isBackgroundTrackingAvailable()) {
+// //     setIsBackground(true);
+// //   } else {
+// //     setIsBackground(false);
+// //   }
+// // }, [])
+//   // return(isBackground);
 
-  return Track.isBackgroundTrackingAvailable();
-
-
-  // setIsBackground(Track.BackgroundTrackingAvailable());
-
-  // const bckgdcheck = useCallback(async () => {
-  //   await Track.BackgroundTrackingAvailable();
-  // }, [isBackground])
-  // setIsBackground(bckgdcheck);
-  // return isBackground;
+//   return Track.isBackgroundTrackingAvailable();
 
 
-  // if (await Track.isBackgroundTrackingAvailable()) {
-  //  console.log('Background services are enabled and available')
-  // } else {
-  //   console.log('Background services NOT AVAILABLE');
- }
+//   // setIsBackground(Track.BackgroundTrackingAvailable());
+
+//   // const bckgdcheck = useCallback(async () => {
+//   //   await Track.BackgroundTrackingAvailable();
+//   // }, [isBackground])
+//   // setIsBackground(bckgdcheck);
+//   // return isBackground;
+
+
+//   // if (await Track.isBackgroundTrackingAvailable()) {
+//   //  console.log('Background services are enabled and available')
+//   // } else {
+//   //   console.log('Background services NOT AVAILABLE');
+//  }

@@ -51,13 +51,13 @@ export async function stopTracking() {
 /**
  * EM ADD BACKGROUND track: Check to see if background location services are available
  */
-export async function isBackgroundTrackingAvailable() {
-  // return await Location.isBackgroundLocationAvailableAsync();
-  // console.log('Checking background location tracking availability');
-  const [isBackground, setIsBackground] = useState<boolean>();
-  Location.isBackgroundLocationAvailableAsync().then(setIsBackground);
-  return isBackground;
-}
+// export async function isBackgroundTrackingAvailable() {
+//   // return await Location.isBackgroundLocationAvailableAsync();
+//   // console.log('Checking background location tracking availability');
+//   const [isBackground, setIsBackground] = useState<boolean>();
+//   Location.isBackgroundLocationAvailableAsync().then(setIsBackground);
+//   return isBackground;
+// }
 
 /**
  * Define the background task that's adding locations to the storage.
