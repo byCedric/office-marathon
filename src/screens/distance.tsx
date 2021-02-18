@@ -1,6 +1,7 @@
 import { LocationObject } from 'expo-location';
 import React, { useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
+import { LOCATION, usePermissions } from 'expo-permissions';
 
 import { Box, Button, Paragraph, Title } from '../providers/theme';
 import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
@@ -9,6 +10,8 @@ export const DistanceScreen: React.FC = () => {
   const locations = useLocationData();
   const tracking = useLocationTracking();
   const distance = useLocationDistance(locations);
+
+  const permission = usePermissions(LOCATION);
 
   return (
     <Box variant='page'>
@@ -20,7 +23,10 @@ export const DistanceScreen: React.FC = () => {
         }
       </Box>
       <Box>
-        <Paragraph>Placeholder for background location stuff</Paragraph>
+        <Paragraph>Placeholder for background location stuff {JSON.stringify(permission[0]?.permissions.location.scope == "whenInUse")} {console.log(permission[0]?.permissions.location.scope)}</Paragraph>
+        {!tracking.isBackground &&            //conditionally toggles message if isBackground is false
+          <Paragraph>To monitor your office marathon, we need access to background location. Please go to your settings and press "allow all the time".</Paragraph>
+        }
       </Box>
       <Box variant='row'>
         {tracking.isTracking
