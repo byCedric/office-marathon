@@ -8,6 +8,8 @@ export const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();
   const [permission, askPermission] = usePermissions(LOCATION);
 
+  const permScope = permission?.permissions.location.scope; 
+
   const onContinue = useCallback(() => {
     navigation.navigate('Distance');
   }, [navigation]);
@@ -15,12 +17,12 @@ export const OnboardingScreen: React.FC = () => {
   useEffect(() => {
     // Only redirect on first render or permission change,
     // not when users go back to this screen.
-    if (permission?.granted) {
+    if (permScope == "always") {
       onContinue();
     }
-  }, [permission?.granted]);
+  }, [permScope]);
 
-  if (permission?.granted) {
+  if (permScope == "always") {
     return (
       <Box variant='page'>
         <Box>
