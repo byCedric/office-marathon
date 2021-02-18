@@ -15,7 +15,14 @@ export const locationTaskName = 'office-marathon';
  * This is a wrapper around `Location.hasStartedLocationUpdatesAsync` with the task name prefilled.
  */
 export async function isTracking(): Promise<boolean> {
-  return await Location.hasStartedLocationUpdatesAsync(locationTaskName);
+    return await Location.hasStartedLocationUpdatesAsync(locationTaskName);
+  // } catch(error) { //Was using this to catch catch the "not authorized" error with a try/catch
+  //   if (JSON.stringify(error).includes("Not authorized to use background location services")) {
+  //     console.log("Background services are not authorized");
+  //   } else {
+  //     console.log(error);
+  //   }
+  // }
 }
 
 /**
