@@ -36,21 +36,21 @@ function getDistanceFromLocations(locations: LocationObject[]) {
  */
 export function useLocationTracking() {
   const [isTracking, setIsTracking] = useState<boolean>();
-  const [isBackground, setIsBackground] = useState<boolean>(true);
+  // const [isBackground, setIsBackground] = useState<boolean>(true);
 
   const onStartTracking = useCallback(async () => {
-    try {
+    // try {
       await Track.startTracking();
       setIsTracking(true);
 
-    } catch(error) {
-      if (JSON.stringify(error).includes("Not authorized to use background location services")) {
-        console.log("Background services are not authorized");
-        setIsBackground(false);
-      } else {
-        console.log(error);
-      }
-    }
+    // } catch(error) {
+    //   if (JSON.stringify(error).includes("Not authorized to use background location services")) {
+    //     console.log("Background services are not authorized");
+    //     setIsBackground(false);
+    //   } else {
+    //     console.log(error);
+    //   }
+    // }
   }, []);
 
   const onStopTracking = useCallback(async () => {
@@ -71,7 +71,7 @@ export function useLocationTracking() {
 
   return {
     isTracking,
-    isBackground,
+    // isBackground,
     startTracking: onStartTracking,
     stopTracking: onStopTracking,
     clearTracking: onClearTracking,
