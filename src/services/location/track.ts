@@ -1,6 +1,5 @@
 import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
-import { useState } from 'react';
 
 import { addLocation, getLocations } from './storage';
 
@@ -16,13 +15,6 @@ export const locationTaskName = 'office-marathon';
  */
 export async function isTracking(): Promise<boolean> {
     return await Location.hasStartedLocationUpdatesAsync(locationTaskName);
-  // } catch(error) { //Was using this to catch catch the "not authorized" error with a try/catch
-  //   if (JSON.stringify(error).includes("Not authorized to use background location services")) {
-  //     console.log("Background services are not authorized");
-  //   } else {
-  //     console.log(error);
-  //   }
-  // }
 }
 
 /**
@@ -54,17 +46,6 @@ export async function stopTracking() {
   await Location.stopLocationUpdatesAsync(locationTaskName);
   console.log('[tracking]', 'stopped background location task');
 }
-
-/**
- * EM ADD BACKGROUND track: Check to see if background location services are available
- */
-// export async function isBackgroundTrackingAvailable() {
-//   // return await Location.isBackgroundLocationAvailableAsync();
-//   // console.log('Checking background location tracking availability');
-//   const [isBackground, setIsBackground] = useState<boolean>();
-//   Location.isBackgroundLocationAvailableAsync().then(setIsBackground);
-//   return isBackground;
-// }
 
 /**
  * Define the background task that's adding locations to the storage.

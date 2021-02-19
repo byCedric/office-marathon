@@ -22,11 +22,6 @@ export const DistanceScreen: React.FC = () => {
           : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
         }
       </Box>
-      {/* <Box>
-        {!tracking.isBackground &&            //conditionally toggles message if isBackground is false
-          <Paragraph>To monitor your office marathon, we need access to background location. Please go to your settings and press "allow all the time".</Paragraph>
-        }
-      </Box> */}
       <Box variant='row'>
         {tracking.isTracking
           ? <Button onPress={tracking.stopTracking}>Stop tracking</Button>
