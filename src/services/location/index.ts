@@ -36,10 +36,11 @@ function getDistanceFromLocations(locations: LocationObject[]) {
  */
 export function useLocationTracking() {
   const [isTracking, setIsTracking] = useState<boolean>();
+  // const [isBackground, setIsBackground] = useState<boolean>(true);
 
   const onStartTracking = useCallback(async () => {
-    await Track.startTracking();
-    setIsTracking(true);
+      await Track.startTracking();
+      setIsTracking(true);
   }, []);
 
   const onStopTracking = useCallback(async () => {
@@ -60,6 +61,7 @@ export function useLocationTracking() {
 
   return {
     isTracking,
+    // isBackground,
     startTracking: onStartTracking,
     stopTracking: onStopTracking,
     clearTracking: onClearTracking,

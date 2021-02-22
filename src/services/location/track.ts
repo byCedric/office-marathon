@@ -3,6 +3,7 @@ import * as Location from 'expo-location';
 
 import { addLocation, getLocations } from './storage';
 
+
 /**
  * The unique name of the background location task.
  */
@@ -13,7 +14,7 @@ export const locationTaskName = 'office-marathon';
  * This is a wrapper around `Location.hasStartedLocationUpdatesAsync` with the task name prefilled.
  */
 export async function isTracking(): Promise<boolean> {
-  return await Location.hasStartedLocationUpdatesAsync(locationTaskName);
+    return await Location.hasStartedLocationUpdatesAsync(locationTaskName);
 }
 
 /**
@@ -67,3 +68,4 @@ TaskManager.defineTask(locationTaskName, async (event) => {
     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
   }
 });
+
