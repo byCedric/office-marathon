@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
 
 import { Box, Button, Paragraph, Title } from '../providers/theme';
-import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location'; 
 
 export const DistanceScreen: React.FC = () => {
   const locations = useLocationData();
