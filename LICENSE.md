@@ -1,6 +1,7 @@
 # The MIT License (MIT)
 
 Copyright (c) 2020-present Cedric van Putten <me@bycedric.com>
+Copyright for portions of this project are held by Cedric van Putten <me@bycedric.com>, 2020-present as part of project <https://github.com/byCedric/office-marathon>. All other copyright for project <https://github.com/e-mcbride/travel-diary-app> are held by Elizabeth McBride <mcbrideelizabethc@gmail.com>, 2021-present.
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
