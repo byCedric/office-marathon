@@ -38,7 +38,7 @@ With this app, you can measure your total distance traveled within the office or
 
 ### Services
 
-- **[services/location](./src/services/location/index.ts)** - calculates distance between points and wraps the functionality in hooks for easy access.
+- **[services/location/index](./src/services/location/index.ts)** - calculates distance between points and wraps the functionality in hooks for easy access.
 - **[services/location/storage](./src/services/location/storage.ts)** - simple helpers to store location data in local storage, using [Async Storage](https://github.com/react-native-async-storage/async-storage).
 - **[services/location/track](./src/services/location/track.ts)** - simple helpers to manage background location tracking, and the background task itself.
 
