@@ -1,9 +1,9 @@
 import { LocationObject } from 'expo-location';
 import React, { useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
-
-import { Box, Button, Paragraph, Title } from '../providers/theme';
+import { Box, Paragraph, Title } from '../providers/theme';
 import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
+import { getProfile } from "../services/profile";
 
 export const DistanceScreen: React.FC = () => {
   const locations = useLocationData();
@@ -13,20 +13,22 @@ export const DistanceScreen: React.FC = () => {
   return (
     <Box variant='page'>
       <Box>
-        <Title>Your office marathon</Title>
+        {/* <Title>Your Travel Diary</Title>
         {distance === 0
           ? <Paragraph>You didn't walk yet, start the location tracking and start walking.</Paragraph>
           : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
-        }
+        } */}
+        <UserProfile userID={1} />
+
       </Box>
-      <Box variant='row'>
+      {/* <Box variant='row'>
         {tracking.isTracking
           ? <Button onPress={tracking.stopTracking}>Stop tracking</Button>
           : <Button onPress={tracking.startTracking}>Start tracking</Button>
         }
         <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button>
       </Box>
-      <DistanceLocationList locations={locations} />
+      <DistanceLocationList locations={locations} /> */}
     </Box>
   );
 };
@@ -65,3 +67,47 @@ const DistanceLocation: React.FC<{ number: number, location: LocationObject }> =
     <Paragraph>lng: {props.location.coords.longitude}</Paragraph>
   </Box>
 );
+
+
+const UserProfile: React.FC<{userID: number}> = (props) => {
+  const profile = getProfile(props.userID); 
+
+
+  let current = new Date();
+  let cDay = current.getDate();
+  let cMonth = current.getMonth()+1;
+  let cYear = current.getFullYear();
+  let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+  let cDate = cDay + "/" + cMonth + "/" + cYear;
+
+  const diaryStart = new Date(2021, 2, 26, 3, 0, 0)
+  const diaryEnd = new Date(2021, 2, 27, 2, 59, 59)
+
+  return (
+    <Box>
+      <Title>Your Profile</Title>
+      <Paragraph>Assigned Diary Date:</Paragraph>
+      <Box variant="row">
+        <Paragraph>Start: </Paragraph>
+        <Paragraph>{diaryStart.toDateString()} at {diaryStart.toLocaleTimeString()}</Paragraph>
+      </Box>
+      <Box variant="row">
+        <Paragraph>End: </Paragraph>
+        <Paragraph>{diaryEnd.toDateString()} at {diaryStart.toLocaleTimeString()}</Paragraph>
+      </Box>
+      <Paragraph>Current Date: { current.toDateString() }</Paragraph>
+      <Paragraph>Current Time: { current.toLocaleTimeString()}</Paragraph>
+
+      <Paragraph>{JSON.stringify(profile)}</Paragraph>
+      <Paragraph>Name: {JSON.stringify(profile.name)}</Paragraph>
+      <Paragraph>Email: {JSON.stringify(profile.email)}</Paragraph>
+    </Box>
+  );
+};
+
+// const fetchUser = async () => {
+//   try {
+//     const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+//     const {name, email } = await response.json();
+//   } catch(error) {}
+// };
