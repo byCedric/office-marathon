@@ -26,7 +26,7 @@ export const DistanceScreen: React.FC = () => {
           ? <Button onPress={tracking.stopTracking}>Stop tracking</Button>
           : <Button onPress={tracking.startTracking}>Start tracking</Button>
         }
-        <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button>
+        <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button> test
       </Box>
       <DistanceLocationList locations={locations} /> */}
     </Box>
