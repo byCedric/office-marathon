@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import { LOCATION, usePermissions } from 'expo-permissions';
+import { LOCATION_FOREGROUND, usePermissions } from 'expo-permissions';
 import React, { useCallback, useEffect } from 'react';
 
 import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 export const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [permission, askPermission] = usePermissions(LOCATION);
+  const [permission, askPermission] = usePermissions(LOCATION_FOREGROUND);
 
   const onContinue = useCallback(() => {
     navigation.navigate('Distance');
@@ -25,7 +25,7 @@ export const OnboardingScreen: React.FC = () => {
       <Box variant='page'>
         <Box>
           <Title>Permissions granted</Title>
-          <Paragraph>To monitor your office marathon, we need access to background location.</Paragraph>
+          <Paragraph>To monitor your office marathon, we need access to your location.</Paragraph>
         </Box>
         <Button onPress={onContinue}>Let's start!</Button>
       </Box>
@@ -36,7 +36,7 @@ export const OnboardingScreen: React.FC = () => {
     <Box variant='page'>
       <Box>
         <Title>We need your permission</Title>
-        <Paragraph>To monitor your office marathon, we need access to background location.</Paragraph>
+        <Paragraph>To monitor your office marathon, we need access to your location.</Paragraph>
       </Box>
       {!permission
         ? <Spinner />
