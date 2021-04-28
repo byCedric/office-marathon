@@ -6,6 +6,10 @@ on:
         description: EAS build profile (apk/aab)
         required: true
         default: apk
+      submit:
+        description: EAS submit (no/yes)
+        required: true
+        default: 'no'
 jobs:
   build:
     name: Install and build
@@ -22,5 +26,21 @@ jobs:
       - name: Start EAS build
         run: >
           npx eas-cli build --wait --platform=android --profile=${{ github.event.inputs.profile }}
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Restore Google Play credentials
+        uses: actions/github-script@v3
+        if: github.event.inputs.submit == 'yes'
+        env:
+          SERVICE_FILE: ${{ secrets.PLAY_SERVICE_FILE }}
+        with:
+          script: |
+            const fs = require('fs')
+            fs.writeFileSync('google-services.json', Buffer.from(process.env.SERVICE_FILE, 'base64'));
+            console.log('Restored Google Play credentials');
+      - name: Submit EAS build
+        if: github.event.inputs.submit == 'yes'
+        run: >
+          npx eas-cli submit --latest --platform=android --key=google-services.json
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
