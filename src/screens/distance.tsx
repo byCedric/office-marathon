@@ -71,7 +71,7 @@ const DistanceLocation: React.FC<{ number: number, location: LocationObject }> =
 
 
 const UserProfile: React.FC<{userID: number}> = (props) => {
-  const profile = getProfile(props.userID); 
+  const profile:any = getProfile(props.userID); 
 
 
   let current = new Date();
