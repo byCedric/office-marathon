@@ -1,7 +1,7 @@
 import { LocationObject } from 'expo-location';
 import React, { useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
-import { Box, Paragraph, Title } from '../providers/theme';
+import { Box, Button, Paragraph, Title } from '../providers/theme';
 import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
 import { getProfile } from "../services/profile";
 
@@ -13,22 +13,22 @@ export const DistanceScreen: React.FC = () => {
   return (
     <Box variant='page'>
       <Box>
-        {/* <Title>Your Travel Diary</Title>
+        <Title>Your Travel Diary</Title>
         {distance === 0
           ? <Paragraph>You didn't walk yet, start the location tracking and start walking.</Paragraph>
           : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
-        } */}
+        }
         <UserProfile userID={1} />
 
       </Box>
-      {/* <Box variant='row'>
+      <Box variant='row'>
         {tracking.isTracking
           ? <Button onPress={tracking.stopTracking}>Stop tracking</Button>
           : <Button onPress={tracking.startTracking}>Start tracking</Button>
         }
-        <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button> test
+        <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button> 
       </Box>
-      <DistanceLocationList locations={locations} /> */}
+      <DistanceLocationList locations={locations} />
     </Box>
   );
 };
@@ -65,6 +65,7 @@ const DistanceLocation: React.FC<{ number: number, location: LocationObject }> =
     <Paragraph>#{props.number + 1}</Paragraph>
     <Paragraph>lat: {props.location.coords.latitude}</Paragraph>
     <Paragraph>lng: {props.location.coords.longitude}</Paragraph>
+    {/* <Paragraph>time: {props.location.timestamp}</Paragraph> */} 
   </Box>
 );
 
@@ -98,7 +99,7 @@ const UserProfile: React.FC<{userID: number}> = (props) => {
       <Paragraph>Current Date: { current.toDateString() }</Paragraph>
       <Paragraph>Current Time: { current.toLocaleTimeString()}</Paragraph>
 
-      <Paragraph>{JSON.stringify(profile)}</Paragraph>
+      {/* <Paragraph>{JSON.stringify(profile)}</Paragraph> */}
       <Paragraph>Name: {JSON.stringify(profile.name)}</Paragraph>
       <Paragraph>Email: {JSON.stringify(profile.email)}</Paragraph>
     </Box>

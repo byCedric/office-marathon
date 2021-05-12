@@ -1,8 +1,8 @@
 import { LocationObject } from 'expo-location';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-
 import * as Storage from './storage';
 import * as Track from './track';
+
 
 const geodist = require('geodist');
 
@@ -36,7 +36,6 @@ function getDistanceFromLocations(locations: LocationObject[]) {
  */
 export function useLocationTracking() {
   const [isTracking, setIsTracking] = useState<boolean>();
-  // const [isBackground, setIsBackground] = useState<boolean>(true);
 
   const onStartTracking = useCallback(async () => {
       await Track.startTracking();
@@ -61,7 +60,6 @@ export function useLocationTracking() {
 
   return {
     isTracking,
-    // isBackground,
     startTracking: onStartTracking,
     stopTracking: onStopTracking,
     clearTracking: onClearTracking,
@@ -71,7 +69,7 @@ export function useLocationTracking() {
 /**
  * A hook to poll for changes in the storage, updates the UI if locations were added.
  */
-export function useLocationData(interval = 3000) {
+export function useLocationData(interval = 100) {
   const locations = useRef<LocationObject[]>([]);
   const [count, setCount] = useState(0); // count state is only used as rerender trigger, from timer callback
 
@@ -80,7 +78,7 @@ export function useLocationData(interval = 3000) {
     // this method is called from outside react, so we can't use state data without reinitializing it
     if (stored.length !== locations.current.length) {
       // update the locations, but this won't trigger a rerender or update
-      locations.current = stored;
+      locations.current = stored; 
       // update the state value, triggering a rerender
       setCount(locations.current.length);
     }

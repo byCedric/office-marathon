@@ -53,3 +53,7 @@ With this app, you can measure your total distance traveled within the office or
   with :heart:&nbsp;&nbsp;<strong>byCedric</strong>
   <br />
 </div>
+
+## TODO:
+
+"Sign out" button
