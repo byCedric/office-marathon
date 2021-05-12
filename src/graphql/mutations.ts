@@ -2,46 +2,40 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createLocations = /* GraphQL */ `
-  mutation CreateLocations(
-    $input: CreateLocationsInput!
-    $condition: ModelLocationsConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createLocations(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }
   }
 `;
-export const updateLocations = /* GraphQL */ `
-  mutation UpdateLocations(
-    $input: UpdateLocationsInput!
-    $condition: ModelLocationsConditionInput
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    updateLocations(input: $input, condition: $condition) {
+    updateUser(input: $input, condition: $condition) {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteLocations = /* GraphQL */ `
-  mutation DeleteLocations(
-    $input: DeleteLocationsInput!
-    $condition: ModelLocationsConditionInput
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    deleteLocations(input: $input, condition: $condition) {
+    deleteUser(input: $input, condition: $condition) {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }

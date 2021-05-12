@@ -2,30 +2,26 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getLocations = /* GraphQL */ `
-  query GetLocations($id: ID!) {
-    getLocations(id: $id) {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }
   }
 `;
-export const listLocationss = /* GraphQL */ `
-  query ListLocationss(
-    $filter: ModelLocationsFilterInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listLocationss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        timestamp
-        latitude
-        longitude
+        email
         createdAt
         updatedAt
       }

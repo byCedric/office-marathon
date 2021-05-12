@@ -1,6 +1,4 @@
-type Location @model {
+type User @model {
   id: ID!
-  timestamp: Int!
-  latitude: Int!
-  longitude: Int!
+  email: String!
 }

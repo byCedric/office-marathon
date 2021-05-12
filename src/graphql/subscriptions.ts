@@ -2,37 +2,31 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateLocations = /* GraphQL */ `
-  subscription OnCreateLocations {
-    onCreateLocations {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateLocations = /* GraphQL */ `
-  subscription OnUpdateLocations {
-    onUpdateLocations {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteLocations = /* GraphQL */ `
-  subscription OnDeleteLocations {
-    onDeleteLocations {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
-      timestamp
-      latitude
-      longitude
+      email
       createdAt
       updatedAt
     }

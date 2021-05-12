@@ -2,47 +2,17 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateLocationsInput = {
+export type CreateUserInput = {
   id?: string | null,
-  timestamp: number,
-  latitude: string,
-  longitude: string,
+  email: string,
 };
 
-export type ModelLocationsConditionInput = {
-  timestamp?: ModelIntInput | null,
-  latitude?: ModelStringInput | null,
-  longitude?: ModelStringInput | null,
-  and?: Array< ModelLocationsConditionInput | null > | null,
-  or?: Array< ModelLocationsConditionInput | null > | null,
-  not?: ModelLocationsConditionInput | null,
+export type ModelUserConditionInput = {
+  email?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
 };
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
 
 export type ModelStringInput = {
   ne?: string | null,
@@ -60,6 +30,20 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
 export type ModelSizeInput = {
   ne?: number | null,
   eq?: number | null,
@@ -70,35 +54,29 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Locations = {
-  __typename: "Locations",
+export type User = {
+  __typename: "User",
   id?: string,
-  timestamp?: number,
-  latitude?: string,
-  longitude?: string,
+  email?: string,
   createdAt?: string,
   updatedAt?: string,
 };
 
-export type UpdateLocationsInput = {
+export type UpdateUserInput = {
   id: string,
-  timestamp?: number | null,
-  latitude?: string | null,
-  longitude?: string | null,
+  email?: string | null,
 };
 
-export type DeleteLocationsInput = {
+export type DeleteUserInput = {
   id?: string | null,
 };
 
-export type ModelLocationsFilterInput = {
+export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
-  timestamp?: ModelIntInput | null,
-  latitude?: ModelStringInput | null,
-  longitude?: ModelStringInput | null,
-  and?: Array< ModelLocationsFilterInput | null > | null,
-  or?: Array< ModelLocationsFilterInput | null > | null,
-  not?: ModelLocationsFilterInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -117,94 +95,84 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelLocationsConnection = {
-  __typename: "ModelLocationsConnection",
-  items?:  Array<Locations | null > | null,
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items?:  Array<User | null > | null,
   nextToken?: string | null,
 };
 
-export type CreateLocationsMutationVariables = {
-  input?: CreateLocationsInput,
-  condition?: ModelLocationsConditionInput | null,
+export type CreateUserMutationVariables = {
+  input?: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type CreateLocationsMutation = {
-  createLocations?:  {
-    __typename: "Locations",
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateLocationsMutationVariables = {
-  input?: UpdateLocationsInput,
-  condition?: ModelLocationsConditionInput | null,
+export type UpdateUserMutationVariables = {
+  input?: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type UpdateLocationsMutation = {
-  updateLocations?:  {
-    __typename: "Locations",
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteLocationsMutationVariables = {
-  input?: DeleteLocationsInput,
-  condition?: ModelLocationsConditionInput | null,
+export type DeleteUserMutationVariables = {
+  input?: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type DeleteLocationsMutation = {
-  deleteLocations?:  {
-    __typename: "Locations",
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetLocationsQueryVariables = {
+export type GetUserQueryVariables = {
   id?: string,
 };
 
-export type GetLocationsQuery = {
-  getLocations?:  {
-    __typename: "Locations",
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListLocationssQueryVariables = {
-  filter?: ModelLocationsFilterInput | null,
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListLocationssQuery = {
-  listLocationss?:  {
-    __typename: "ModelLocationsConnection",
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
     items?:  Array< {
-      __typename: "Locations",
+      __typename: "User",
       id: string,
-      timestamp: number,
-      latitude: string,
-      longitude: string,
+      email: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -212,37 +180,31 @@ export type ListLocationssQuery = {
   } | null,
 };
 
-export type OnCreateLocationsSubscription = {
-  onCreateLocations?:  {
-    __typename: "Locations",
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateLocationsSubscription = {
-  onUpdateLocations?:  {
-    __typename: "Locations",
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteLocationsSubscription = {
-  onDeleteLocations?:  {
-    __typename: "Locations",
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
     id: string,
-    timestamp: number,
-    latitude: string,
-    longitude: string,
+    email: string,
     createdAt: string,
     updatedAt: string,
   } | null,
