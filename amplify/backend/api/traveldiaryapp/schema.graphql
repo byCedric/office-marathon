@@ -1,5 +1,6 @@
-type LatLon @model {
-  timestamp: Number!
+type Locations @model {
+  id: ID!
+  timestamp: Int!
   latitude: String!
   longitude: String!
 }
