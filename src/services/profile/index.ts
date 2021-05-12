@@ -22,10 +22,10 @@ export function getProfile(userID: number) {
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users/') //https://jsonplaceholder.typicode.com/users/
       .then(response => response.json())
-      .then(json => {
-        // setData(json);
-        setProfile(json[
-          json.findIndex(prof => prof.id === userID)
+      .then(profiles => {
+        // use index to find the correct profile from entire json doc of profiles
+        setProfile(profiles[
+          profiles.findIndex((prof: { id: number; }) => prof.id === userID)
         ]);
       })
       .catch((error) => alert(error));
@@ -39,9 +39,9 @@ export function getProfile(userID: number) {
  * Will call it `getDate()`
  */
 
-export const getDate = async (date:type) => {
+// export const getDate = async (date:type) => {
     
-}
+// }
 
 
 /**
