@@ -39,6 +39,9 @@ export const AuthLoadingScreen: React.FC = () => {
         fetchUser();
     }, [])
 
+    //ended tutorial(https://www.youtube.com/watch?v=HdLbavvfflQ&list=PLKrxTdwfEw2WjZ4rfVM_K-RdEJkvWi36u&index=15&t=2531s) 
+    // around 1hr 20 min. Recommended start time: 1hr 34 min
+
     return (
         <Box variant='page'>
             <Box>
