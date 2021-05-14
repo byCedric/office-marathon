@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { LOCATION, usePermissions } from 'expo-permissions';
 import React, { useCallback, useEffect } from 'react';
+import { Box, Button, Paragraph, Spinner, Title } from '../providers/theme';
 
-import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 export const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();

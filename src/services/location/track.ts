@@ -1,7 +1,7 @@
-import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
+import { addLocation } from './storage';
 
-import { addLocation, getLocations } from './storage';
 
 
 /**
@@ -32,8 +32,9 @@ export async function startTracking() {
       notificationColor: '#333333',
     },
     // ios behavior
-    activityType: Location.ActivityType.Fitness,
+    activityType: Location.ActivityType.Other,
     showsBackgroundLocationIndicator: true,
+    pausesUpdatesAutomatically: true,
   });
   console.log('[tracking]', 'started background location task');
 }

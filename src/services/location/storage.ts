@@ -1,5 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DataStore } from 'aws-amplify';
 import { LocationObject } from 'expo-location';
+import { Location } from "../../models";
+
 
 /**
  * The unique key of the location storage.
@@ -42,3 +45,22 @@ export async function clearLocations(): Promise<void> {
   await AsyncStorage.removeItem(locationStorageName);
   console.log('[storage]', 'cleared locations');
 }
+
+
+/**
+ * Use AWS DataStore to store locations
+ */
+
+export async function onNewLocation(location: LocationObject) {
+  const newLocation = await DataStore.save(
+    new Location({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      timestamp:location.timestamp
+    })
+  );
+}
+
+
+// then have something that checks if there was a new location added, and if so, runs onNewLocation
+
