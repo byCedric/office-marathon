@@ -1,4 +1,14 @@
 type User @model {
   id: ID!
   email: String!
+  locations: [Location] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Location @model @key(name: "byUser", fields: ["userID", "timestamp"]) {
+  id: ID!
+  userID: ID!
+  timestamp: Int!
+  latitude: Int!
+  longitude: Int!
+  user: User @connection(fields: ["userID"])
 }
