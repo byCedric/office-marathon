@@ -7,6 +7,25 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser {
       id
       email
+      locations {
+        items {
+          id
+          userID
+          timestamp
+          latitude
+          longitude
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -17,6 +36,25 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser {
       id
       email
+      locations {
+        items {
+          id
+          userID
+          timestamp
+          latitude
+          longitude
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -27,6 +65,112 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser {
       id
       email
+      locations {
+        items {
+          id
+          userID
+          timestamp
+          latitude
+          longitude
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLocation = /* GraphQL */ `
+  subscription OnCreateLocation {
+    onCreateLocation {
+      id
+      userID
+      timestamp
+      latitude
+      longitude
+      user {
+        id
+        email
+        locations {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLocation = /* GraphQL */ `
+  subscription OnUpdateLocation {
+    onUpdateLocation {
+      id
+      userID
+      timestamp
+      latitude
+      longitude
+      user {
+        id
+        email
+        locations {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLocation = /* GraphQL */ `
+  subscription OnDeleteLocation {
+    onDeleteLocation {
+      id
+      userID
+      timestamp
+      latitude
+      longitude
+      user {
+        id
+        email
+        locations {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
