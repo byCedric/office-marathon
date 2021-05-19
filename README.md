@@ -61,3 +61,9 @@ With this app, you can measure your total distance traveled within the office or
 ## Tutorial progress:
 
 Ended [tutorial](https://www.youtube.com/watch?v=HdLbavvfflQ&list=PLKrxTdwfEw2WjZ4rfVM_K-RdEJkvWi36u&index=15&t=2531s) around 1hr 20 min. Recommended start time: 1hr 34 min.
+
+Tomorrow:
+
+1. get "stop tracking" button working
+2. Fix the schema so IDs are proper
+3. Get the locations showing up on screen (actually may not be necessary)

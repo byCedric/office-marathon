@@ -111,9 +111,9 @@ export type CreateLocationInput = {
 
 export type ModelLocationConditionInput = {
   userID?: ModelIDInput | null,
-  timestamp?: ModelIntInput | null,
-  latitude?: ModelIntInput | null,
-  longitude?: ModelIntInput | null,
+  timestamp?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  longitude?: ModelFloatInput | null,
   and?: Array< ModelLocationConditionInput | null > | null,
   or?: Array< ModelLocationConditionInput | null > | null,
   not?: ModelLocationConditionInput | null,
@@ -135,7 +135,7 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelIntInput = {
+export type ModelFloatInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -179,9 +179,9 @@ export type ModelUserConnection = {
 export type ModelLocationFilterInput = {
   id?: ModelIDInput | null,
   userID?: ModelIDInput | null,
-  timestamp?: ModelIntInput | null,
-  latitude?: ModelIntInput | null,
-  longitude?: ModelIntInput | null,
+  timestamp?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  longitude?: ModelFloatInput | null,
   and?: Array< ModelLocationFilterInput | null > | null,
   or?: Array< ModelLocationFilterInput | null > | null,
   not?: ModelLocationFilterInput | null,

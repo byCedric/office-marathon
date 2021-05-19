@@ -7,8 +7,8 @@ type User @model {
 type Location @model @key(name: "byUser", fields: ["userID", "timestamp"]) {
   id: ID!
   userID: ID!
-  timestamp: Int!
-  latitude: Int!
-  longitude: Int!
+  timestamp: Float!
+  latitude: Float!
+  longitude: Float!
   user: User @connection(fields: ["userID"])
 }

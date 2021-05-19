@@ -1,6 +1,7 @@
+import API, { graphqlOperation } from '@aws-amplify/api';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
-import { addLocation } from './storage';
+import { createLocation } from '../../graphql/mutations';
 
 
 
@@ -52,6 +53,24 @@ export async function stopTracking() {
  * Define the background task that's adding locations to the storage.
  * This method isn't "directly" connected to React, that's why we store the data locally.
  */
+// TaskManager.defineTask(locationTaskName, async (event) => {
+//   if (event.error) {
+//     return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
+//   }
+
+//   const locations = (event.data as any).locations as Location.LocationObject[];
+//   console.log('[tracking]', 'Received new locations', locations);
+
+//   try {
+//     // have to add it sequentially, parses/serializes existing JSON
+//     for (const location of locations) {
+//       await addLocation(location);
+//     }
+//   } catch (error) {
+//     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
+//   }
+// });
+
 TaskManager.defineTask(locationTaskName, async (event) => {
   if (event.error) {
     return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
@@ -63,10 +82,21 @@ TaskManager.defineTask(locationTaskName, async (event) => {
   try {
     // have to add it sequentially, parses/serializes existing JSON
     for (const location of locations) {
-      await addLocation(location);
+      const newLocation = {
+        id: location.timestamp,
+        userID: location.timestamp,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        timestamp: location.timestamp
+      }
+      await API.graphql(
+        graphqlOperation(
+          createLocation, 
+          { input: newLocation }
+        )
+      ) //addLocation(location);
     }
   } catch (error) {
     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
   }
 });
-

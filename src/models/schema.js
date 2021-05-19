@@ -54,21 +54,21 @@ export const schema = {
                 "timestamp": {
                     "name": "timestamp",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "Float",
                     "isRequired": true,
                     "attributes": []
                 },
                 "latitude": {
                     "name": "latitude",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "Float",
                     "isRequired": true,
                     "attributes": []
                 },
                 "longitude": {
                     "name": "longitude",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "Float",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -108,5 +108,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "ead2433903c2c5d8c6455e6218494b2c"
+    "version": "8edb2f292ed1cfff6d6b16b711c40cf3"
 };

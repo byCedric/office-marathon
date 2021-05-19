@@ -18,7 +18,11 @@ export const DistanceScreen: React.FC = () => {
           ? <Paragraph>You didn't walk yet, start the location tracking and start walking.</Paragraph>
           : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
         }
-        <UserProfile userID={1} />
+        {/* <UserProfile userID={1} /> */}
+      </Box>
+      <Box>
+        <Title>Test Box</Title>
+        <Paragraph>This box is to test how to get locations to AWS</Paragraph>
 
       </Box>
       <Box variant='row'>
@@ -28,6 +32,7 @@ export const DistanceScreen: React.FC = () => {
         }
         <Button variant='primary' onPress={tracking.clearTracking}>Reset data</Button> 
       </Box>
+
       <DistanceLocationList locations={locations} />
     </Box>
   );
