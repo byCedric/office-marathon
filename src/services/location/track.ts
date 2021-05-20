@@ -28,7 +28,7 @@ export async function startTracking() {
     timeInterval: 60 * 1000,
     // android behavior
     foregroundService: {
-      notificationTitle: 'Office marathon is active',
+      notificationTitle: 'Travel Diary is active',
       notificationBody: 'Monitoring your location to measure total distance',
       notificationColor: '#333333',
     },
@@ -80,7 +80,6 @@ TaskManager.defineTask(locationTaskName, async (event) => {
   console.log('[tracking]', 'Received new locations', locations);
 
   try {
-    // have to add it sequentially, parses/serializes existing JSON
     for (const location of locations) {
       const newLocation = {
         id: location.timestamp,

@@ -23,6 +23,7 @@ export const DistanceScreen: React.FC = () => {
       <Box>
         <Title>Test Box</Title>
         <Paragraph>This box is to test how to get locations to AWS</Paragraph>
+        <Paragraph>Is it tracking: {JSON.stringify(tracking.isTracking)}</Paragraph>
 
       </Box>
       <Box variant='row'>
