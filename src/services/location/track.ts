@@ -2,6 +2,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 import { createLocation } from '../../graphql/mutations';
+import { getUserId } from '../profile/authentication';
 
 
 
@@ -77,13 +78,14 @@ TaskManager.defineTask(locationTaskName, async (event) => {
   }
 
   const locations = (event.data as any).locations as Location.LocationObject[];
+  const userID = await getUserId();
+
   console.log('[tracking]', 'Received new locations', locations);
 
   try {
     for (const location of locations) {
       const newLocation = {
-        id: location.timestamp,
-        userID: location.timestamp,
+        userID: userID,
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
         timestamp: location.timestamp
