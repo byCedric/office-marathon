@@ -4,26 +4,29 @@ import { FlatList } from 'react-native';
 import { Box, Button, Paragraph, Title } from '../providers/theme';
 import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
 import { getProfile } from "../services/profile";
+import { startDate } from "../services/profile/date";
 
 export const DistanceScreen: React.FC = () => {
   const locations = useLocationData();
   const tracking = useLocationTracking();
   const distance = useLocationDistance(locations);
+  const diaryStart = startDate;
 
   return (
     <Box variant='page'>
       <Box>
         <Title>Your Travel Diary</Title>
         {distance === 0
-          ? <Paragraph>You didn't walk yet, start the location tracking and start walking.</Paragraph>
-          : <Paragraph>You walked {distance} meters! Keep it up!</Paragraph>
+          ? <Paragraph>You have not recorded your 24-hour travel diary yet. Start the location tracking to begin.</Paragraph>
+          : <Paragraph>You traveled {distance} meters! Keep it up!</Paragraph>
         }
         {/* <UserProfile userID={1} /> */}
       </Box>
       <Box>
         <Title>Test Box</Title>
-        <Paragraph>This box is to test how to get locations to AWS</Paragraph>
+        <Paragraph>This box is to test how to get locations to AWS, and to test new features to app</Paragraph>
         <Paragraph>Is it tracking: {JSON.stringify(tracking.isTracking)}</Paragraph>
+        <Paragraph>{JSON.stringify(locations)}</Paragraph>
 
       </Box>
       <Box variant='row'>

@@ -26,8 +26,9 @@ export async function isTracking(): Promise<boolean> {
 export async function startTracking() {
   await Location.startLocationUpdatesAsync(locationTaskName, {
     accuracy: Location.Accuracy.BestForNavigation,
-    timeInterval: 60 * 1000,
-    // android behavior
+    distanceInterval: 5,
+    //android behavior
+    timeInterval: 10 * 1000,
     foregroundService: {
       notificationTitle: 'Travel Diary is active',
       notificationBody: 'Monitoring your location to measure total distance',

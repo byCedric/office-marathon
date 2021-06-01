@@ -60,10 +60,16 @@ With this app, you can measure your total distance traveled within the office or
 
 ## Tutorial progress:
 
-Ended [tutorial](https://www.youtube.com/watch?v=HdLbavvfflQ&list=PLKrxTdwfEw2WjZ4rfVM_K-RdEJkvWi36u&index=15&t=2531s) around 1hr 20 min. Recommended start time: 1hr 34 min.
+Solid tutorial [here.](https://www.youtube.com/watch?v=HdLbavvfflQ&list=PLKrxTdwfEw2WjZ4rfVM_K-RdEJkvWi36u&index=15&t=2531s)
 
-Tomorrow:
+TODO:
 
-1. get "stop tracking" button working
-2. Fix the schema so IDs are proper
-3. Get the locations showing up on screen (actually may not be necessary)
+1. Make the location tracking happen at a specific time
+2. Get the locations showing up on screen (may not be necessary, but i want to do it so that I can watch on my phone)
+3. Make "go to settings" button if they don't have location settings set up
+
+Assigning date:
+
+1. they are assigned a random date within the date range specified
+2. When the time is 03:00:00 (in time zone of the survey area) on that date, start location tracking
+3. When the time is 02:59:59 on the next day, stop location tracking
