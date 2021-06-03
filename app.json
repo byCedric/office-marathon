@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "office-marathon",
-    "slug": "office-marathon",
-    "version": "1.0.0",
+    "name": "travel-diary-app",
+    "slug": "travel-diary-app",
+    "version": "0.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
