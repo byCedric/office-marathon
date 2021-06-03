@@ -1,7 +1,9 @@
-import * as TaskManager from 'expo-task-manager';
+import API, { graphqlOperation } from '@aws-amplify/api';
 import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
+import { createLocation } from '../../graphql/mutations';
+import { getUserId } from '../profile/authentication';
 
-import { addLocation, getLocations } from './storage';
 
 
 /**
@@ -24,16 +26,18 @@ export async function isTracking(): Promise<boolean> {
 export async function startTracking() {
   await Location.startLocationUpdatesAsync(locationTaskName, {
     accuracy: Location.Accuracy.BestForNavigation,
-    timeInterval: 60 * 1000,
-    // android behavior
+    distanceInterval: 5,
+    //android behavior
+    timeInterval: 10 * 1000,
     foregroundService: {
-      notificationTitle: 'Office marathon is active',
+      notificationTitle: 'Travel Diary is active',
       notificationBody: 'Monitoring your location to measure total distance',
       notificationColor: '#333333',
     },
     // ios behavior
-    activityType: Location.ActivityType.Fitness,
+    activityType: Location.ActivityType.Other,
     showsBackgroundLocationIndicator: true,
+    pausesUpdatesAutomatically: true,
   });
   console.log('[tracking]', 'started background location task');
 }
@@ -51,21 +55,50 @@ export async function stopTracking() {
  * Define the background task that's adding locations to the storage.
  * This method isn't "directly" connected to React, that's why we store the data locally.
  */
+// TaskManager.defineTask(locationTaskName, async (event) => {
+//   if (event.error) {
+//     return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
+//   }
+
+//   const locations = (event.data as any).locations as Location.LocationObject[];
+//   console.log('[tracking]', 'Received new locations', locations);
+
+//   try {
+//     // have to add it sequentially, parses/serializes existing JSON
+//     for (const location of locations) {
+//       await addLocation(location);
+//     }
+//   } catch (error) {
+//     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
+//   }
+// });
+
 TaskManager.defineTask(locationTaskName, async (event) => {
   if (event.error) {
     return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
   }
 
   const locations = (event.data as any).locations as Location.LocationObject[];
+  const userID = await getUserId();
+
   console.log('[tracking]', 'Received new locations', locations);
 
   try {
-    // have to add it sequentially, parses/serializes existing JSON
     for (const location of locations) {
-      await addLocation(location);
+      const newLocation = {
+        userID: userID,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        timestamp: location.timestamp
+      }
+      await API.graphql(
+        graphqlOperation(
+          createLocation, 
+          { input: newLocation }
+        )
+      ) //addLocation(location);
     }
   } catch (error) {
     console.log('[tracking]', 'Something went wrong when saving a new location...', error);
   }
 });
-

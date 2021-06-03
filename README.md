@@ -38,7 +38,7 @@ With this app, you can measure your total distance traveled within the office or
 
 ### Services
 
-- **[services/location](./src/services/location/index.ts)** - calculates distance between points and wraps the functionality in hooks for easy access.
+- **[services/location/index](./src/services/location/index.ts)** - calculates distance between points and wraps the functionality in hooks for easy access.
 - **[services/location/storage](./src/services/location/storage.ts)** - simple helpers to store location data in local storage, using [Async Storage](https://github.com/react-native-async-storage/async-storage).
 - **[services/location/track](./src/services/location/track.ts)** - simple helpers to manage background location tracking, and the background task itself.
 
@@ -53,3 +53,23 @@ With this app, you can measure your total distance traveled within the office or
   with :heart:&nbsp;&nbsp;<strong>byCedric</strong>
   <br />
 </div>
+
+## TODO:
+
+"Sign out" button
+
+## Tutorial progress:
+
+Solid tutorial [here.](https://www.youtube.com/watch?v=HdLbavvfflQ&list=PLKrxTdwfEw2WjZ4rfVM_K-RdEJkvWi36u&index=15&t=2531s)
+
+TODO:
+
+1. Make the location tracking happen at a specific time
+2. Get the locations showing up on screen (may not be necessary, but i want to do it so that I can watch on my phone)
+3. Make "go to settings" button if they don't have location settings set up
+
+Assigning date:
+
+1. they are assigned a random date within the date range specified
+2. When the time is 03:00:00 (in time zone of the survey area) on that date, start location tracking
+3. When the time is 02:59:59 on the next day, stop location tracking
