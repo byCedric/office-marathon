@@ -52,7 +52,11 @@ export async function stopTracking() {
  */
 TaskManager.defineTask(locationTaskName, async (event) => {
   if (event.error) {
-    return console.error('[tracking]', 'Something went wrong within the background location task...', event.error);
+    return console.error(
+      '[tracking]',
+      'Something went wrong within the background location task...',
+      event.error
+    );
   }
 
   const locations = (event.data as any).locations as Location.LocationObject[];
@@ -60,10 +64,13 @@ TaskManager.defineTask(locationTaskName, async (event) => {
 
   try {
     // have to add it sequentially, parses/serializes existing JSON
-    for (const location of locations) {
-      await addLocation(location);
-    }
+
+    await addLocation(locations);
   } catch (error) {
-    console.log('[tracking]', 'Something went wrong when saving a new location...', error);
+    console.log(
+      '[tracking]',
+      'Something went wrong when saving a new location...',
+      error
+    );
   }
 });

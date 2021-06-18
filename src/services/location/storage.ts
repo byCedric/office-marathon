@@ -27,11 +27,18 @@ export async function setLocations(locations: LocationObject[]): Promise<void> {
  * Add a new location to the storage.
  * This is a helper to append a new location to the storage.
  */
-export async function addLocation(location: LocationObject): Promise<LocationObject[]> {
+export async function addLocation(
+  locations: LocationObject[]
+): Promise<LocationObject[]> {
   const existing = await getLocations();
-  const locations = [...existing, location];
-  await setLocations(locations);
-  console.log('[storage]', 'added location -', locations.length, 'stored locations');
+  const newLocations = [...existing, ...locations];
+  await setLocations(newLocations);
+  console.log(
+    '[storage]',
+    'added location -',
+    newLocations.length,
+    'stored locations'
+  );
   return locations;
 }
 
