@@ -21,13 +21,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: Set up EAS
+        uses: expo/expo-github-action@v6
+        with:
+          eas-version: latest
+          eas-cache: true
+          token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Start EAS build
-        run: >
-          npx eas-cli build --wait --platform=android --profile=${{ github.event.inputs.profile }}
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas build --wait --platform=android --profile=${{ github.event.inputs.profile }}
       - name: Restore Google Play credentials
         uses: actions/github-script@v3
         if: github.event.inputs.submit == 'yes'
@@ -40,7 +43,4 @@ jobs:
             console.log('Restored Google Play credentials');
       - name: Submit EAS build
         if: github.event.inputs.submit == 'yes'
-        run: >
-          npx eas-cli submit --latest --platform=android --key=google-services.json
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas submit --latest --platform=android --key=google-services.json
