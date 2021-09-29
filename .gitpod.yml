@@ -1,0 +1,24 @@
+image: bycedric/expo-gitpod
+
+tasks:
+  - init: yarn install
+    command: yarn start
+    openIn: bottom
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+
+ports:
+  # Expo bundler 
+  - port: 19000
+    onOpen: ignore
+    visibility: public
+  # Expo devtools
+  - port: 19002
+    onOpen: open-preview
+    visibility: private
+  # Expo web
+  - port: 19006
+    onOpen: open-preview
+    visibility: private
