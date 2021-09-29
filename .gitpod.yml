@@ -16,9 +16,9 @@ ports:
     visibility: public
   # Expo devtools
   - port: 19002
-    onOpen: open-preview
+    onOpen: ignore
     visibility: private
   # Expo web
   - port: 19006
-    onOpen: open-preview
+    onOpen: ignore
     visibility: private
