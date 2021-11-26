@@ -21,14 +21,18 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
-      - name: Publish to Expo
-        run: expo publish --release-channel=pr-${{ github.event.number }}
-      - name: Get deployment link
-        run: echo "::set-output name=path::@bycedric/office-marathon?release-channel=pr-${{ github.event.number }}"
-        id: expo
+      - name: Publish to Expo & create a QR code
+        uses: byCedric/expo-preview-action@expo-qr-code
+        id: preview
+        with:
+          channel: pr-${{ github.event.number }}
       - name: Comment deployment link
         uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: Awesome! You can [preview the PR here](https://expo.io/${{ steps.expo.outputs.path }}).<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>
+          msg: >
+            Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
+            <a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+            <br><br>
+            ${{ steps.publish.outputs.EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE }}
