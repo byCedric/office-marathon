@@ -26,6 +26,7 @@ jobs:
         id: preview
         with:
           channel: pr-${{ github.event.number }}
+          project-flavor: expo-go
       - name: Comment deployment link
         uses: unsplash/comment-on-pr@master
         env:
