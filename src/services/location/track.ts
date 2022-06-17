@@ -23,7 +23,7 @@ export async function isTracking(): Promise<boolean> {
 export async function startTracking() {
   await Location.startLocationUpdatesAsync(locationTaskName, {
     accuracy: Location.Accuracy.BestForNavigation,
-    timeInterval: 60 * 1000,
+    timeInterval: 15 * 1000,
     // android behavior
     foregroundService: {
       notificationTitle: 'Office marathon is active',

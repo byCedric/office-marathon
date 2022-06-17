@@ -64,7 +64,7 @@ const theme = makeTheme({
       backgroundColor: 'black',
       borderRadius: 2,
       paddingX: 3,
-      paddingY: 2
+      paddingY: 0
     },
     ['primary-text']: {
       color: 'white',

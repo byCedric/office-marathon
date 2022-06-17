@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useForegroundPermissions } from 'expo-location';
 import React, { useCallback, useEffect } from 'react';
@@ -6,8 +5,9 @@ import React, { useCallback, useEffect } from 'react';
 import { StackParamList } from '../providers/navigation';
 import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
-export const OnboardingScreen: React.FC = () => {
-  const { navigation } = useNavigation<StackScreenProps<StackParamList, 'Onboarding'>>();
+type OnboardingScreenProps = StackScreenProps<StackParamList, 'Onboarding'>;
+
+export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
   const [permission, askPermission] = useForegroundPermissions();
 
   const onContinue = useCallback(() => {
