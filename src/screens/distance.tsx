@@ -5,7 +5,7 @@ import { FlatList } from 'react-native';
 import { Box, Button, Paragraph, Title } from '../providers/theme';
 import { useLocationData, useLocationDistance, useLocationTracking } from '../services/location';
 
-export const DistanceScreen: React.FC = () => {
+export function DistanceScreen() {
   const locations = useLocationData();
   const tracking = useLocationTracking();
   const distance = useLocationDistance(locations);
@@ -29,23 +29,23 @@ export const DistanceScreen: React.FC = () => {
       <DistanceLocationList locations={locations} />
     </Box>
   );
-};
+}
 
-const DistanceLocationList: React.FC<{ locations: LocationObject[] }> = (props) => {
+function DistanceLocationList({ locations }: { locations: LocationObject[] }) {
   const listRef = useRef<FlatList<LocationObject>>(null);
 
   useEffect(() => {
     // don't ask... if we call it directly,
     // the list scrolls to the "previous" end instead of the "new" end
     setTimeout(() => listRef.current?.scrollToEnd())
-  }, [props.locations.length]);
+  }, [locations.length]);
 
   return (
     <Box>
       <FlatList
         ref={listRef}
         style={{ flexGrow: 0, flexBasis: 200 }}
-        data={props.locations}
+        data={locations}
         keyExtractor={(location, index) => `${location.timestamp}-${index}`}
         renderItem={entry => (
           <DistanceLocation
@@ -56,12 +56,14 @@ const DistanceLocationList: React.FC<{ locations: LocationObject[] }> = (props) 
       />
     </Box>
   );
-};
+}
 
-const DistanceLocation: React.FC<{ number: number, location: LocationObject }> = (props) => (
-  <Box variant='row'>
-    <Paragraph>#{props.number + 1}</Paragraph>
-    <Paragraph>lat: {props.location.coords.latitude}</Paragraph>
-    <Paragraph>lng: {props.location.coords.longitude}</Paragraph>
-  </Box>
-);
+function DistanceLocation({ number, location }: { number: number, location: LocationObject }) {
+  return (
+    <Box variant='row'>
+      <Paragraph>#{number + 1}</Paragraph>
+      <Paragraph>lat: {location.coords.latitude}</Paragraph>
+      <Paragraph>lng: {location.coords.longitude}</Paragraph>
+    </Box>
+  );
+}

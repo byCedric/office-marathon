@@ -7,7 +7,7 @@ import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 type OnboardingScreenProps = StackScreenProps<StackParamList, 'Onboarding'>;
 
-export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
+export function OnboardingScreen({ navigation }: OnboardingScreenProps) {
   const [permission, askPermission] = useForegroundPermissions();
 
   const onContinue = useCallback(() => {
@@ -46,4 +46,4 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }
       }
     </Box>
   );
-};
+}

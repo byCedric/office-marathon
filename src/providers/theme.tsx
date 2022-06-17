@@ -1,6 +1,6 @@
 import { ActivityIndicator, createThemedComponent, DripsyProvider, makeTheme, useDripsyTheme } from 'dripsy';
 import Constants from 'expo-constants';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 const theme = makeTheme({
@@ -94,20 +94,23 @@ interface ButtonProps {
 const ButtonPressable = createThemedComponent(Pressable, { themeKey: 'buttons', defaultVariant: 'primary' });
 const ButtonText = createThemedComponent(Text, { themeKey: 'buttons', defaultVariant: 'primary-text' });
 
-export const Button: React.FC<ButtonProps> = (props) => (
-  <ButtonPressable
-    disabled={props.disabled}
-    onPress={props.onPress}
-    accessibilityRole="button"
-  >
-    <Box variant="center">
-      <ButtonText variant={`${props.variant}-text`}>
-        {props.children}
-      </ButtonText>
-    </Box>
-  </ButtonPressable>
-);
+export function Button({ disabled, onPress, variant, children }: PropsWithChildren<ButtonProps>) {
+  return (
+    <ButtonPressable
+      accessibilityRole="button"
+      disabled={disabled}
+      onPress={onPress}
+      variant={variant}
+    >
+      <Box variant="center">
+        <ButtonText variant={`${variant}-text`}>
+          {children}
+        </ButtonText>
+      </Box>
+    </ButtonPressable>
+  );
+}
 
-export const Spinner: React.FC = () => (
-  <ActivityIndicator color="accent" />
-);
+export function Spinner() {
+  return <ActivityIndicator color="accent" />;
+}
