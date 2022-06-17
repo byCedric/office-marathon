@@ -33,9 +33,9 @@ jobs:
         run: yarn install
 
       - name: 🚀 Publish preview
-        run: >
-          expo publish 
-            --non-interactive
+        run: |
+          expo publish \
+            --non-interactive \
             --release-channel=pr-${{ github.event.number }}
 
       - name: 💬 Comment preview
