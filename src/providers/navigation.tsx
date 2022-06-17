@@ -5,7 +5,12 @@ import React from 'react';
 import { DistanceScreen } from '../screens/distance';
 import { OnboardingScreen } from '../screens/onboarding';
 
-const Stack = createStackNavigator();
+export type StackParamList = {
+  Onboarding: undefined;
+  Distance: undefined;
+};
+
+const Stack = createStackNavigator<StackParamList>();
 
 export const NavigationProvider: React.FC = () => (
   <NavigationContainer>
