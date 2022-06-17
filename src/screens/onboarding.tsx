@@ -1,12 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import { LOCATION_FOREGROUND, usePermissions } from 'expo-permissions';
+import { StackScreenProps } from '@react-navigation/stack';
+import { useForegroundPermissions } from 'expo-location';
 import React, { useCallback, useEffect } from 'react';
 
+import { StackParamList } from '../providers/navigation';
 import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
-export const OnboardingScreen: React.FC = () => {
-  const navigation = useNavigation();
-  const [permission, askPermission] = usePermissions(LOCATION_FOREGROUND);
+type OnboardingScreenProps = StackScreenProps<StackParamList, 'Onboarding'>;
+
+export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
+  const [permission, askPermission] = useForegroundPermissions();
 
   const onContinue = useCallback(() => {
     navigation.navigate('Distance');

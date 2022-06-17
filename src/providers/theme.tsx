@@ -1,22 +1,22 @@
-import { ActivityIndicator, createThemedComponent, DripsyProvider, Theme, useDripsyTheme } from 'dripsy';
+import { ActivityIndicator, createThemedComponent, DripsyProvider, makeTheme, useDripsyTheme } from 'dripsy';
 import Constants from 'expo-constants';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 
-const theme: Theme = {
+const theme = makeTheme({
+  types: {
+    strictVariants: true,
+  },
   colors: {
     background: '#f8f8f8',
     text: 'rgba(0,0,0,0.7)',
     accent: '#333',
   },
+  space: [0, 12, 14, 16, 32],
+  radii: [1, 2, 4],
   fonts: {
     root: 'open-sans',
   },
-  space: [0, 12, 14, 16, 32],
-  radii: [1, 2, 4],
-};
-
-const fonts = {
   customFonts: {
     'open-sans': {
       bold: 'open-sans-semibold',
@@ -24,9 +24,6 @@ const fonts = {
       default: 'open-sans-regular',
     },
   },
-};
-
-const components: Theme = {
   layout: {
     page: {
       flex: 1,
@@ -61,26 +58,24 @@ const components: Theme = {
       color: 'text',
       paddingY: 6,
     },
-    button: {
-      primary: {
-        color: 'white',
-        fontFamily: 'open-sans',
-        fontWeight: 'bold',
-      },
-    },
   },
   buttons: {
     primary: {
       backgroundColor: 'black',
       borderRadius: 2,
       paddingX: 3,
-      paddingY: 2
+      paddingY: 0
+    },
+    ['primary-text']: {
+      color: 'white',
+      fontFamily: 'open-sans',
+      fontWeight: 'bold',
     },
   },
-};
+});
 
 export const ThemeProvider: React.FC = (props) => (
-  <DripsyProvider theme={{ ...theme, ...fonts, ...components }}>
+  <DripsyProvider theme={theme}>
     {props.children}
   </DripsyProvider>
 );
@@ -97,7 +92,7 @@ interface ButtonProps {
 }
 
 const ButtonPressable = createThemedComponent(Pressable, { themeKey: 'buttons', defaultVariant: 'primary' });
-const ButtonText = createThemedComponent(Text, { themeKey: 'text.button', defaultVariant: 'primary' });
+const ButtonText = createThemedComponent(Text, { themeKey: 'buttons', defaultVariant: 'primary-text' });
 
 export const Button: React.FC<ButtonProps> = (props) => (
   <ButtonPressable
@@ -105,18 +100,14 @@ export const Button: React.FC<ButtonProps> = (props) => (
     onPress={props.onPress}
     accessibilityRole="button"
   >
-    <Box variant='center'>
-      <ButtonText variant={props.variant}>
+    <Box variant="center">
+      <ButtonText variant={`${props.variant}-text`}>
         {props.children}
       </ButtonText>
     </Box>
   </ButtonPressable>
 );
 
-export const Spinner: React.FC = (props) => {
-  const { theme } = useDripsyTheme();
-
-  return (
-    <ActivityIndicator color={theme.colors?.accent} />
-  );
-};
+export const Spinner: React.FC = () => (
+  <ActivityIndicator color="accent" />
+);
