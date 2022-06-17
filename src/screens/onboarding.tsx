@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import { LOCATION_FOREGROUND, usePermissions } from 'expo-permissions';
+import { useForegroundPermissions } from 'expo-location';
 import React, { useCallback, useEffect } from 'react';
 
 import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 export const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [permission, askPermission] = usePermissions(LOCATION_FOREGROUND);
+  const [permission, askPermission] = useForegroundPermissions();
 
   const onContinue = useCallback(() => {
     navigation.navigate('Distance');
