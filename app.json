@@ -2,7 +2,7 @@
   "expo": {
     "name": "office-marathon",
     "slug": "office-marathon",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -33,6 +33,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "584c5703-eecf-4f21-ab38-84a86f74e8f2"
+      }
     }
   }
 }

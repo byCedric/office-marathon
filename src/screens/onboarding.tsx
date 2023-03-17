@@ -1,13 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { useForegroundPermissions } from 'expo-location';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { StackParamList } from '../providers/navigation';
 import { Box, Button, Spinner, Title, Paragraph } from '../providers/theme';
 
 type OnboardingScreenProps = StackScreenProps<StackParamList, 'Onboarding'>;
 
-export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
+export function OnboardingScreen({ navigation }: OnboardingScreenProps) {
   const [permission, askPermission] = useForegroundPermissions();
 
   const onContinue = useCallback(() => {
@@ -20,7 +20,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }
     if (permission?.granted) {
       onContinue();
     }
-  }, [permission?.granted]);
+  }, [onContinue, permission?.granted]);
 
   if (permission?.granted) {
     return (
