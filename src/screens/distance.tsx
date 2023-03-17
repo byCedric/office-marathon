@@ -41,7 +41,9 @@ function DistanceLocationList({ locations }: DistanceLocationListProps) {
   useEffect(() => {
     // don't ask... if we call it directly,
     // the list scrolls to the "previous" end instead of the "new" end
-    setTimeout(() => listRef.current?.scrollToEnd())
+    if (locations.length) {
+      setTimeout(() => listRef.current?.scrollToEnd());
+    }
   }, [locations.length]);
 
   return (

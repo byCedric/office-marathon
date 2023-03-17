@@ -105,6 +105,7 @@ export function useLocationDistance(locations: LocationObject[], precision = 2) 
     const distance = getDistanceFromLocations(locations);
     const factor = Math.pow(10, precision);
     const rounded = Math.round(distance * factor) / factor;
-    return rounded;
+
+    return Number.isNaN(rounded) ? 0 : rounded;
   }, [locations, precision]);
 }

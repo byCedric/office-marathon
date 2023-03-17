@@ -1,6 +1,6 @@
 import { OpenSans_600SemiBold, OpenSans_400Regular } from '@expo-google-fonts/open-sans';
 import { useFonts } from 'expo-font';
-import SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, PropsWithChildren } from 'react';
 
 // Prevent the splash screen from hiding automatically
