@@ -1,7 +1,7 @@
 import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
 
-import { addLocation, getLocations } from './storage';
+import { addLocation } from './storage';
 
 /**
  * The unique name of the background location task.

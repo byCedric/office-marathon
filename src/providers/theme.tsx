@@ -1,6 +1,6 @@
-import { ActivityIndicator, createThemedComponent, DripsyProvider, makeTheme, useDripsyTheme } from 'dripsy';
+import { ActivityIndicator, createThemedComponent, DripsyProvider, makeTheme } from 'dripsy';
 import Constants from 'expo-constants';
-import React from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 const theme = makeTheme({
@@ -74,40 +74,43 @@ const theme = makeTheme({
   },
 });
 
-export const ThemeProvider: React.FC = (props) => (
-  <DripsyProvider theme={theme}>
-    {props.children}
-  </DripsyProvider>
-);
+export function ThemeProvider(props: PropsWithChildren) {
+  return (
+    <DripsyProvider theme={theme}>
+      {props.children}
+    </DripsyProvider>
+  );
+}
 
 export const Box = createThemedComponent(View, { themeKey: 'layout', defaultVariant: 'box' });
 export const Title = createThemedComponent(Text, { themeKey: 'text', defaultVariant: 'title' });
 export const Paragraph = createThemedComponent(Text, { themeKey: 'text', defaultVariant: 'paragraph' });
 
-interface ButtonProps {
-  children?: string;
+type ButtonProps = PropsWithChildren<{
   variant?: string;
   disabled?: boolean;
-  onPress?: React.ComponentProps<typeof Pressable>['onPress'];
-}
+  onPress?: ComponentProps<typeof Pressable>['onPress'];
+}>;
 
 const ButtonPressable = createThemedComponent(Pressable, { themeKey: 'buttons', defaultVariant: 'primary' });
 const ButtonText = createThemedComponent(Text, { themeKey: 'buttons', defaultVariant: 'primary-text' });
 
-export const Button: React.FC<ButtonProps> = (props) => (
-  <ButtonPressable
-    disabled={props.disabled}
-    onPress={props.onPress}
-    accessibilityRole="button"
-  >
-    <Box variant="center">
-      <ButtonText variant={`${props.variant}-text`}>
-        {props.children}
-      </ButtonText>
-    </Box>
-  </ButtonPressable>
-);
+export function Button(props: ButtonProps) {
+  return (
+    <ButtonPressable
+      disabled={props.disabled}
+      onPress={props.onPress}
+      accessibilityRole="button"
+    >
+      <Box variant="center">
+        <ButtonText variant={`${props.variant}-text`}>
+          {props.children}
+        </ButtonText>
+      </Box>
+    </ButtonPressable>
+  );
+}
 
-export const Spinner: React.FC = () => (
-  <ActivityIndicator color="accent" />
-);
+export function Spinner() {
+  return <ActivityIndicator color="accent" />;
+}
