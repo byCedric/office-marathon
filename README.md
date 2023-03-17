@@ -49,7 +49,7 @@ This demo app is a simple example of how to use background location tracking on 
 
 - Clone the repository
 - `$ yarn install`
-- `$ expo start`
+- `$ yarn expo start`
 
 <div align="center">
   <br />
