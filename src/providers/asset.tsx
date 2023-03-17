@@ -1,4 +1,5 @@
-import { useFonts, OpenSans_600SemiBold, OpenSans_400Regular } from '@expo-google-fonts/open-sans';
+import { OpenSans_600SemiBold, OpenSans_400Regular } from '@expo-google-fonts/open-sans';
+import { useFonts } from 'expo-font';
 import SplashScreen from 'expo-splash-screen';
 import { useEffect, PropsWithChildren } from 'react';
 
@@ -12,7 +13,6 @@ export function AssetProvider(props: PropsWithChildren) {
   });
 
   useEffect(() => {
-    // Hide the splash screen when the fonts are loaded
     if (isLoaded) SplashScreen.hideAsync();
   }, [isLoaded]);
 
