@@ -47,6 +47,9 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: 👷 Configure project
+        run: eas init --id 584c5703-eecf-4f21-ab38-84a86f74e8f2
+
       - name: 🚀 Publish update
         run: eas update --auto --non-interactive
 
@@ -71,6 +74,9 @@ jobs:
 
       - name: 📦 Install dependencies
         run: yarn install
+
+      - name: 👷 Configure project
+        run: eas init --id 584c5703-eecf-4f21-ab38-84a86f74e8f2
 
       - name: 📱 Build app
         if: ${{ github.event.inputs.submit != 'true' }}
