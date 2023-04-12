@@ -27,6 +27,8 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN_STAGING }}
+        env:
+          EXPO_STAGING: true
 
       - name: 📦 Install dependencies
         run: yarn install
