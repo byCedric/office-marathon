@@ -26,15 +26,21 @@ jobs:
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          token: ${{ secrets.EXPO_TOKEN_STAGING }}
+        env:
+          EXPO_STAGING: true
 
       - name: 📦 Install dependencies
         run: yarn install
 
       - name: 👷 Configure project
-        run: eas init --id 584c5703-eecf-4f21-ab38-84a86f74e8f2
+        run: eas init --id 3070fd4b-f78c-4af8-84be-7c3da1948c88
+        env:
+          EXPO_STAGING: true
 
       - name: 🚀 Publish preview
         uses: expo/expo-github-action/preview@v8
         with:
           command: eas update --auto --branch pr-${{ github.event.number }}
+        env:
+          EXPO_STAGING: true
