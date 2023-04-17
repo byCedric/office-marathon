@@ -17,6 +17,7 @@
     "dripsy": "^3.10.0",
     "expo": "^48.0.7",
     "expo-constants": "~14.2.1",
+    "expo-dev-client": "~2.2.1",
     "expo-font": "~11.1.1",
     "expo-location": "~15.1.1",
     "expo-splash-screen": "~0.18.1",
