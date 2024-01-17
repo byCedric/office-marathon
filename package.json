@@ -1,13 +1,13 @@
 {
   "private": true,
   "name": "@bycedric/office-marathon",
-  "main": "index.js",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo-google-fonts/open-sans": "^0.2.3",
