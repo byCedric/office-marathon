@@ -24,6 +24,8 @@
 
 This demo app is a simple example of how to use background location tracking on Android. With this app, you can measure your total distance traveled within the office or your home.
 
+This should trigger a build.
+
 ## 📁 Structure
 
 - [`app`](./src/app.tsx) - is our entrypoint for the app, combining all providers.
